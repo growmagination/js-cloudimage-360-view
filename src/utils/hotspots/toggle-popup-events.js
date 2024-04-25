@@ -1,17 +1,19 @@
-import { isTrue } from "../../ci360.utils";
-import { getHotspotIcon } from "./get-hotspot-icon";
+"use strict";
 
-export const togglePopupEvents = (hotspotsProps, event, isMouseDown) => {
-  const iClickOnHotspotIcon = event && isTrue(event.target, 'data-cloudimage-360-hotspot');
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.togglePopupEvents = void 0;
+var _ci = require("../../ci360.utils");
+var _getHotspotIcon = require("./get-hotspot-icon");
+var togglePopupEvents = function togglePopupEvents(hotspotsProps, event, isMouseDown) {
+  var iClickOnHotspotIcon = event && (0, _ci.isTrue)(event.target, 'data-cloudimage-360-hotspot');
   if (iClickOnHotspotIcon) return;
-
-  hotspotsProps.forEach((hotspotProps) => {
-    const { variant } = hotspotProps;
-    const { anchorId } = variant;
-
-    const hotspotIcon = getHotspotIcon(anchorId);
-
+  hotspotsProps.forEach(function (hotspotProps) {
+    var variant = hotspotProps.variant;
+    var anchorId = variant.anchorId;
+    var hotspotIcon = (0, _getHotspotIcon.getHotspotIcon)(anchorId);
     hotspotIcon.style.pointerEvents = isMouseDown ? 'none' : 'all';
   });
-}
+};
+exports.togglePopupEvents = togglePopupEvents;

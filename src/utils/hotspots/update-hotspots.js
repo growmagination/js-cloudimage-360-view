@@ -1,31 +1,40 @@
-import { prepareHotspotsPositions } from './prepare-hotspots-positions';
-import { getHotspotIcon } from './get-hotspot-icon';
-import { updateHotspotIconPosition } from './update-hotspot-icon-position';
-import { hideHotspotIcon } from './hide-hotspot-icon';
-import { getHotspotOriantaion } from './get-hotspot-orientation';
+"use strict";
 
-export const updateHotspots = (container, hotspotsProps, activeImageX = 0, activeImageY = 0, movingDirection = 'x-axis') => {
-  hotspotsProps.forEach((hotspotProps) => {
-    const { positions, initialDimensions, orientation, variant
-    } = hotspotProps;
-    const { anchorId } = variant;
-
-    const hotspotOriantaion = getHotspotOriantaion(movingDirection);
-    const currentImageIndex = orientation === 'x' ? activeImageX : activeImageY;
-
-    const hotspotsPositions = prepareHotspotsPositions(positions);
-
-    const currentPosition = hotspotsPositions
-      .find((hotspotPosition) => hotspotPosition.imageIndex === currentImageIndex);
-
-    const hotspotIcon = getHotspotIcon(anchorId);
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateHotspots = void 0;
+var _prepareHotspotsPositions = require("./prepare-hotspots-positions");
+var _getHotspotIcon = require("./get-hotspot-icon");
+var _updateHotspotIconPosition = require("./update-hotspot-icon-position");
+var _hideHotspotIcon = require("./hide-hotspot-icon");
+var _getHotspotOrientation = require("./get-hotspot-orientation");
+var updateHotspots = function updateHotspots(container, hotspotsProps) {
+  var activeImageX = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var activeImageY = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var movingDirection = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'x-axis';
+  hotspotsProps.forEach(function (hotspotProps) {
+    var positions = hotspotProps.positions,
+      initialDimensions = hotspotProps.initialDimensions,
+      orientation = hotspotProps.orientation,
+      variant = hotspotProps.variant;
+    var anchorId = variant.anchorId;
+    var hotspotOriantaion = (0, _getHotspotOrientation.getHotspotOriantaion)(movingDirection);
+    var currentImageIndex = orientation === 'x' ? activeImageX : activeImageY;
+    var hotspotsPositions = (0, _prepareHotspotsPositions.prepareHotspotsPositions)(positions);
+    var currentPosition = hotspotsPositions.find(function (hotspotPosition) {
+      return hotspotPosition.imageIndex === currentImageIndex;
+    });
+    var hotspotIcon = (0, _getHotspotIcon.getHotspotIcon)(anchorId);
     if (currentPosition && hotspotOriantaion === orientation) {
-      const { xCoord = 0, yCoord = 0 } = currentPosition;
-
-      updateHotspotIconPosition(container, initialDimensions, hotspotIcon, xCoord, yCoord);
+      var _currentPosition$xCoo = currentPosition.xCoord,
+        xCoord = _currentPosition$xCoo === void 0 ? 0 : _currentPosition$xCoo,
+        _currentPosition$yCoo = currentPosition.yCoord,
+        yCoord = _currentPosition$yCoo === void 0 ? 0 : _currentPosition$yCoo;
+      (0, _updateHotspotIconPosition.updateHotspotIconPosition)(container, initialDimensions, hotspotIcon, xCoord, yCoord);
     } else {
-      hideHotspotIcon(hotspotIcon);
+      (0, _hideHotspotIcon.hideHotspotIcon)(hotspotIcon);
     }
   });
 };
+exports.updateHotspots = updateHotspots;

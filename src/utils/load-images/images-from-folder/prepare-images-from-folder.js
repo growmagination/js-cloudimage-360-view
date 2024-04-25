@@ -1,21 +1,25 @@
-import { AND_SYMBOL_REGEX, ORGINAL_SIZE_REGEX } from '../../../constants/regex';
-import { pad } from '../pad';
+"use strict";
 
-export const prepareImagesFromFolder = (imagesSrc, srcConfig, loadOriginalImages) => {
-  const { amount, indexZeroBase } = srcConfig || {};
-
-  return [...new Array(amount)].map((_item, index) => {
-    const nextZeroFilledIndex = pad(index + 1, indexZeroBase);
-    const imageSrc = imagesSrc.replace('{index}', nextZeroFilledIndex);
-
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.prepareImagesFromFolder = void 0;
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+var _regex = require("../../../constants/regex");
+var _pad = require("../pad");
+var prepareImagesFromFolder = function prepareImagesFromFolder(imagesSrc, srcConfig, loadOriginalImages) {
+  var _ref = srcConfig || {},
+    amount = _ref.amount,
+    indexZeroBase = _ref.indexZeroBase;
+  return (0, _toConsumableArray2.default)(new Array(amount)).map(function (_item, index) {
+    var nextZeroFilledIndex = (0, _pad.pad)(index + 1, indexZeroBase);
+    var imageSrc = imagesSrc.replace('{index}', nextZeroFilledIndex);
     if (loadOriginalImages) {
-      const imageOriginalSrc = imageSrc
-        .replace(ORGINAL_SIZE_REGEX, '')
-        .replace(AND_SYMBOL_REGEX, '?');
-
+      var imageOriginalSrc = imageSrc.replace(_regex.ORGINAL_SIZE_REGEX, '').replace(_regex.AND_SYMBOL_REGEX, '?');
       return imageOriginalSrc;
     }
-
     return imageSrc;
   });
 };
+exports.prepareImagesFromFolder = prepareImagesFromFolder;

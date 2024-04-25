@@ -1,24 +1,28 @@
-import { prepareFirstImageFromFolder } from "./prepare-first-image/prepare-first-image-from-folder";
-import { prepareFirstImageFromList } from "./prepare-first-image/prepare-first-image-from-list";
+"use strict";
 
-export const initLazyload = (imagesSrc, srcConfig, cb) => {
-  const { imageList, lazySelector, innerBox } = srcConfig || {};
-  let firstImageSrc;
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initLazyload = void 0;
+var _prepareFirstImageFromFolder = require("./prepare-first-image/prepare-first-image-from-folder");
+var _prepareFirstImageFromList = require("./prepare-first-image/prepare-first-image-from-list");
+var initLazyload = function initLazyload(imagesSrc, srcConfig, cb) {
+  var _ref = srcConfig || {},
+    imageList = _ref.imageList,
+    lazySelector = _ref.lazySelector,
+    innerBox = _ref.innerBox;
+  var firstImageSrc;
   if (imageList) {
     try {
-      const images = JSON.parse(imageList);
-
-      firstImageSrc = prepareFirstImageFromList(images, srcConfig);
+      var images = JSON.parse(imageList);
+      firstImageSrc = (0, _prepareFirstImageFromList.prepareFirstImageFromList)(images, srcConfig);
     } catch (error) {
-      console.error(`Wrong format in image-list attribute: ${error.message}`);
+      console.error("Wrong format in image-list attribute: ".concat(error.message));
     }
   } else {
-    firstImageSrc = prepareFirstImageFromFolder(imagesSrc, srcConfig);
+    firstImageSrc = (0, _prepareFirstImageFromFolder.prepareFirstImageFromFolder)(imagesSrc, srcConfig);
   }
-
-  const image = new Image();
-
+  var image = new Image();
   image.setAttribute('data-src', firstImageSrc);
   image.style.position = 'absolute';
   image.style.top = 0;
@@ -26,13 +30,12 @@ export const initLazyload = (imagesSrc, srcConfig, cb) => {
   image.style.width = '100%';
   image.style.maxWidth = '100%';
   image.style.maxHeight = '100%';
-
-
   if (lazySelector) image.className = lazySelector;
-
   innerBox.appendChild(image);
-
   if (cb) {
-    image.onload = () => cb(image);
+    image.onload = function () {
+      return cb(image);
+    };
   }
-}
+};
+exports.initLazyload = initLazyload;
