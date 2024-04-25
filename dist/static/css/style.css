@@ -1,0 +1,230 @@
+.cloudimage-360-icons-container {
+  position: absolute;
+  display: flex;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 95%;
+  flex-direction: column;
+  align-items: center;
+  z-index: 101;
+}
+
+.cloudimage-360-magnifier-icon {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  background: url('https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/loupe.svg') 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-fullscreen-icon {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  background: url('https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/full_screen.svg') 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-reset-zoom-icon {
+  display: none;
+  width: 30px;
+  height: 30px;
+  margin-top: auto;
+  cursor: pointer;
+  background: url('https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/ic-resize.svg?vh=248986') 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-close-fullscreen-icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background: url('https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/cross.svg') 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 0%;
+  height: 8px;
+  background-color: rgb(165, 175, 184);
+  z-index: 100;
+}
+
+.cloudimage-360-box-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+.cloudimage-360-view-360-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 4px;
+  transition: 0.5s all;
+  color: rgb(80, 80, 80);
+  text-align: center;
+  line-height: 100px;
+  z-index: 2;
+}
+
+.cloudimage-360-view-360-circle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 80%;
+  height: auto;
+  margin: auto;
+  pointer-events: none;
+  user-select: none;
+  transition: 0.5s all;
+  z-index: 2;
+}
+
+.cloudimage-360-fullscreen-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: #FFF;
+}
+
+.cloudimage-360-img-magnifier-glass {
+  background-color: #FFF;
+  background-repeat: no-repeat;
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: wait;
+  line-height: 200px;
+  text-align: center;
+  z-index: 1000;
+  width: 250px;
+  height: 250px;
+  top: -75px;
+  right: -85px;
+}
+
+.cloudimage-360 .cloudimage-360-left,
+.cloudimage-360 .cloudimage-360-right {
+  padding: 8px;
+  background: rgb(244, 244, 244);
+  border: none;
+  border-radius: 4px;
+}
+
+.cloudimage-360 .cloudimage-360-left:focus,
+.cloudimage-360 .cloudimage-360-right:focus {
+  outline: none;
+}
+
+.cloudimage-360 .cloudimage-360-left {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: calc(50% - 15px);
+  left: 20px;
+}
+
+.cloudimage-360 .cloudimage-360-right {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: calc(50% - 15px);
+  right: 20px;
+}
+
+.cloudimage-360 .cloudimage-360-left:before,
+.cloudimage-360 .cloudimage-360-right:before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360 .cloudimage-360-left:before {
+  background-image: url('https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/assets/img/arrow-left.svg');
+}
+
+.cloudimage-360 .cloudimage-360-right:before {
+  background-image: url('https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/assets/img/arrow-right.svg');
+}
+
+.cloudimage-360 .cloudimage-360-left.not-active,
+.cloudimage-360 .cloudimage-360-right.not-active {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.cloudimage-360 .cloudimage-360-top,
+.cloudimage-360 .cloudimage-360-bottom {
+  padding: 8px;
+  background: rgb(244, 244, 244);
+  border: none;
+  border-radius: 4px;
+}
+
+.cloudimage-360 .cloudimage-360-top:focus,
+.cloudimage-360 .cloudimage-360-bottom:focus {
+  outline: none;
+}
+
+.cloudimage-360 .cloudimage-360-top {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  left: calc(50% - 15px);
+  top: 20px;
+  transform: rotate(90deg);
+}
+
+.cloudimage-360 .cloudimage-360-bottom {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  left: calc(50% - 15px);
+  bottom: 20px;
+  transform: rotate(90deg);
+}
+
+.cloudimage-360 .cloudimage-360-top:before,
+.cloudimage-360 .cloudimage-360-bottom:before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360 .cloudimage-360-top:before {
+  background-image: url('https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/assets/img/arrow-left.svg');
+}
+
+.cloudimage-360 .cloudimage-360-bottom:before {
+  background-image: url('https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/assets/img/arrow-right.svg');
+}
+
+.cloudimage-360 .cloudimage-360-top.not-active,
+.cloudimage-360 .cloudimage-360-bottom.not-active {
+  opacity: 0.4;
+  cursor: default;
+}
