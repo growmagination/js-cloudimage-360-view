@@ -18,6 +18,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var CI360Viewer = /*#__PURE__*/function () {
   function CI360Viewer(container, fullscreen, hotspotsConfigs) {
+    console.log("Initializing CI360Viewer with:", { container, fullscreen, hotspotsConfigs });
     (0, _classCallCheck2.default)(this, CI360Viewer);
     this.container = container;
     this.movementStart = {
@@ -67,6 +68,7 @@ var CI360Viewer = /*#__PURE__*/function () {
   }, {
     key: "mouseDown",
     value: function mouseDown(event) {
+      console.log("MouseDown Event Triggered", { event, imagesLoaded: this.imagesLoaded });
       if (!this.imagesLoaded) return;
       var isMouseOnHotspotElement = (0, _utils.isMouseOnHotspot)();
       var pageX = event.pageX,
@@ -621,6 +623,7 @@ var CI360Viewer = /*#__PURE__*/function () {
   }, {
     key: "onResizedImageLoad",
     value: function onResizedImageLoad(orientation, image, index) {
+      console.log("Image loaded for resizing", { orientation, index });
       if (orientation === _constants.ORIENTATIONS.Y) {
         this.resizedImagesY[index] = image;
       } else {
@@ -664,6 +667,7 @@ var CI360Viewer = /*#__PURE__*/function () {
   }, {
     key: "update",
     value: function update() {
+      console.log("Updating view", { activeImageX: this.activeImageX, activeImageY: this.activeImageY });
       var image = this.imagesX[this.activeImageX - 1];
       if (this.movingDirection === _constants.ORIENTATIONS.Y) {
         image = this.imagesY[this.activeImageY - 1];
@@ -770,6 +774,7 @@ var CI360Viewer = /*#__PURE__*/function () {
       this.speedFactor = (0, _utils.getSpeedFactor)(this.dragSpeed, this.amountX, this.container.offsetWidth);
       if (this.autoplay) {
         this.play();
+        this.stop();
       }
       if (this.disableDrag) {
         this.container.style.cursor = 'default';
@@ -829,28 +834,38 @@ var CI360Viewer = /*#__PURE__*/function () {
     value: function closeFullscreenModalOnEsc(event) {
       this.closeFullscreenModal(event);
     }
-  }, {
+  }, 
+
+  
+  {
     key: "play",
     value: function play() {
+      console.log("Starting autoplay");
       var _this4 = this;
       if (this.bottomCircle) this.hide360ViewCircleIcon();
       this.remove360ViewIcon();
       this.loopTimeoutId = window.setInterval(function () {
+        console.log("Before loop call:", { activeImageX: this.activeImageX, activeImageY: this.activeImageY });
         _this4.loop(_this4.reversed);
         var isPlayedOnce = (0, _utils.isCompletedOneCycle)(_this4.autoplayBehavior, _this4.activeImageX, _this4.activeImageY, _this4.amountX, _this4.amountY, _this4.reversed);
+        console.log("Autoplay iteration check:", { isPlayedOnce });
         if (_this4.playOnce && isPlayedOnce) {
+          console.log("Stopping autoplay after one cycle");
           window.clearTimeout(_this4.loopTimeoutId);
           _this4.autoplay = false;
           if (_this4.hotspotsConfigs) {
             (0, _utils.updateHotspots)(_this4.container, _this4.hotspotsConfigs, _this4.activeImageX, _this4.activeImageY, _this4.movingDirection, _this4.isClicked);
           }
         }
+        console.log("Autoplay iteration", { imageX: this.activeImageX, imageY: this.activeImageY });
+        // Check if the last image in the sequence is being displayed
       }, this.autoplaySpeed);
     }
   }, {
     key: "stop",
     value: function stop() {
       if (this.bottomCircle) this.show360ViewCircleIcon();
+      console.log("Stopping autoplay", { loopTimeoutId: this.loopTimeoutId });
       window.clearTimeout(this.loopTimeoutId);
     }
   }, {
